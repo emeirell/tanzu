@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: db01
+spec:
+  containers:
+  - name: db01
+    image: demo.goharbor.io/emeirelles/busybox:latest
+    command:
+      - sleep
+      - "3600"
+    imagePullPolicy: IfNotPresent
+    volumeMounts:
+    - name: mydisk
+      mountPath: /tmp
+  volumes:
+  - name: mydisk
+    persistentVolumeClaim:
+      claimName: disk01
+  restartPolicy: Always
