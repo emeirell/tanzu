@@ -1,0 +1,23 @@
+apiVersion: vmoperator.vmware.com/v1alpha1
+kind: VirtualMachine
+metadata:
+  name: server-ubuntu-01
+spec:
+  imageName: vm-ubuntu
+  className: best-effort-xsmall
+  powerState: poweredOn
+  storageClass: nfs-policy
+  networkInterfaces:
+  - networkName: "network-1"
+    networkType: vsphere-distributed
+  vmMetadata:
+    configMapName: default-vm
+    transport: OvfEnv
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+    name: default-vm
+data:
+  hostname: server01
+  password: VMware1!
