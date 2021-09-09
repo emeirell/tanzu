@@ -1,0 +1,18 @@
+#cloud-config
+ssh_pwauth: yes
+chpasswd:
+    list: |
+      user01:VMware1!
+      ubuntu:VMware1!
+    expire: true   
+users:
+  - default
+  - name: user01
+    gecos: Full User 01
+    lock_passwd: false
+    sudo: ALL=(ALL) NOPASSWD:ALL
+package_upgrade: true
+packages:
+ - apache2
+runcmd:
+  - "echo 'VM has been sucessfully created by Tanzu VM Service'  >> /etc/motd"
